@@ -7,12 +7,14 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ModelLogin', 'login');
+        $this->load->model('Auth');
     }
 
     public function index()
     {
         $this->load->view('Login');
     }
+
     public function Action()
     {
         try {
@@ -38,28 +40,31 @@ class Login extends CI_Controller
                 throw new Exception($CekLogin['message']);
 
             // kalau lulus validasi set token & insert ke tabel token login
-            $RandomToken = ceil(time() / rand(1, 999));
-            $this->session->set_userdata('token', sha1('login' . $RandomToken));
+            $RandomToken = sha1('login' . ceil(time() / rand(1, 999)));
+            $this->session->set_userdata(sha1('token-login') . '_token', $RandomToken);
 
             // insert token login
             $this->db->insert('token_login', [
-                'id_admin' => $CekLogin->id_admin,
+                'id_admin' => $CekLogin['data']['id_admin'],
                 'token'    => $RandomToken,
             ]);
 
             // set message flashdata
-            $this->session->set_flashdata('pesan', "<script>pesan_sukses('Selamat datang " . $CekLogin['username'] . "')</script>");
+            $this->session->set_flashdata('pesan', "<script>pesan_sukses('Selamat datang " . $CekLogin['data']['username'] . "')</script>");
             redirect('dashboard');
         } catch (Exception $Error) {
-            $this->session->set_flashdata('pesan', "<script>pesan_warning('" . ($Error->getMesasge()) . "')</script>");
+            $this->session->set_flashdata('pesan', "<script>pesan_warning('" . ($Error->getmessage()) . "')</script>");
+            // echo $Error->getMessage();
             redirect('login');
         } catch (Throwable $Error) {
-            $this->session->set_flashdata('pesan', "<script>pesan_warning('Throwable " . ($Error->getMesasge()) . "')</script>");
-            redirect('login');
+            $this->session->set_flashdata('pesan', "<script>pesan_warning('Throwable " . ($Error->getmessage()) . "')</script>");
+            // redirect('login');
         }
     }
 
     public function Logout()
     {
+        session_destroy();
+        redirect('login');
     }
 }

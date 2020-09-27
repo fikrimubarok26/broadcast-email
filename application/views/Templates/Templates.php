@@ -5,12 +5,13 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
+    <meta name="description" content="Aplikasi Broadcast E-mail" />
+    <meta name="author" content="CV DIAN GLOBAL TECH" />
     <meta name="url" content="<?= base_url() ?>" />
     <title>Aplikasi Broadcast Email </title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     <?php
-    if ($crud != null) {
+    if (isset($crud) && $crud != null) {
         foreach ($crud->css_files as $file) : ?>
             <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
         <?php endforeach; ?>
@@ -40,7 +41,7 @@
         <div class=" ml-auto ">
             <ul class="navbar-nav ml-md-0">
                 <li class="nav-item ">
-                    <a class="nav-link" id="userDropdown" href="<?= base_url('logout') ?>" role="button"><i class="fas fa-power-off"></i> Logout</a>
+                    <a class="nav-link" id="userDropdown" onclick="return confirm('Apakah anda yakin, ingin keluar dari aplikasi ini?')" href="<?= base_url('logout') ?>" role="button"><i class="fas fa-power-off"></i> Logout</a>
                 </li>
             </ul>
         </div>

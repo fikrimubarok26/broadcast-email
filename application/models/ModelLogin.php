@@ -15,16 +15,17 @@ class ModelLogin extends CI_Model
             if ($CekLogin->num_rows() <= 0)
                 throw new Exception('Username atau password salah');
             $source = $CekLogin->row();
-            if (password_hash($source->password, PASSWORD_DEFAULT) == false)
+            if (password_verify($data['password'], $source->password) == false)
                 throw new Exception('Password salah');
 
             // ambil id_admin
-            $data['id_admin'] = $CekLogin->id;
+            $data['id_admin'] = $source->id;
             $message = [
                 'status' => 200,
                 'message' => 'ok',
                 'data' => $data
             ];
+            // $this->library->printr($message/);
         } catch (Exception $Error) {
             $message = [
                 'status' => 400,

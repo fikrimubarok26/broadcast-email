@@ -68,16 +68,17 @@ function ReToken() {
 	})
 }
 
-function pesan(message) {
-	toastr.info(message.replace("'", ""));
+function pesan(message, title = 'Informasi') {
+	toastr.info(message.replace("'", ""), title);
 }
 
-function pesan_warning(message) {
-	toastr.warning(message.replace("'", ""));
+
+function pesan_warning(message, title = 'Pesan Kesalahan') {
+	toastr.warning(message.replace("'", ""), title);
 }
 
-function pesan_sukses(message) {
-	toastr.success(message.replace("'", ""));
+function pesan_sukses(message, title = 'Pesan') {
+	toastr.success(message.replace("'", ""), title);
 }
 
 function ValidateEmail(email) {
