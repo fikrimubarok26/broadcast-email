@@ -6,12 +6,15 @@ class Login extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        // session_destroy();
+        // $this->library->printr($_SESSION);
         $this->load->model('ModelLogin', 'login');
         $this->load->model('Auth');
     }
 
     public function index()
     {
+
         $this->load->view('Login');
     }
 

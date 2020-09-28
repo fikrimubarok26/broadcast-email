@@ -17,7 +17,7 @@ class Pangkat extends CI_Controller
         $crud = $this->grocery_crud;
         $crud->set_table('pangkat');
         $crud->fields('nama_pangkat');
-        $crud->set_theme('datatables');
+        $crud->set_theme('flexigrid');
 
         $crud->columns('nama_pangkat');
         $crud->display_as('nama_pangkat', 'NAMA PANGKAT');

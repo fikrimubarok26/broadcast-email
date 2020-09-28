@@ -130,6 +130,7 @@ $autoload['language'] = array();
 | You can also supply an alternative model name to be assigned
 | in the controller:
 |
-|    $autoload['model'] = array('first_model' => 'first');
+|    $autoload['model'] = array('first_model' => 'first');w
  */
 $autoload['model'] = array('Request' => 'req');
+$autoload['sparks'] = array('sk-hashids/1.0.5');

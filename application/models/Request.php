@@ -197,28 +197,36 @@ class Request extends CI_Model
 
         // SMTP configuration
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; //sesuaikan sesuai nama domain hosting/server yang digunakan
+        $mail->Host = $dataNa['host']; //sesuaikan sesuai nama domain hosting/server yang digunakan
         $mail->SMTPAuth = true;
-        $mail->Username = 'suksesdianglobaltech@gmail.com'; // user email
-        $mail->Password = 'suksespasti123'; // password email
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
-        $mail->setFrom('suksesdianglobaltech@gmail.com', ''); // user email
+        $mail->Username = $dataNa['email']; // user email
+        $mail->Password = $this->library->Decode($dataNa['password'],2); // password email
+        $mail->SMTPSecure = $dataNa['smtp_secure'];
+        $mail->Port = $dataNa['port'];
+        $mail->setFrom($dataNa['email'], ''); // user email
         // $mail->addReplyTo('xxx@hostdomain.com', ''); //user email
-        $mail->addAddress('agastypandu@gmail.com'); //email tujuan pengiriman email
 
+        // $mail->addAddress('titilestiasriwahyuni@gmail.com'); //email tujuan pengiriman email
 
-        // if ($dataNa['email'] != '') {
-        //     foreach  ($dataNa['email'] as $key) {
-        //         $mail->addAddress($key); //email tujuan pengiriman email
-        //     }
-        // }
+        if ($dataNa['emailPangkat'] != '') {
+            foreach ($dataNa['emailPangkat'] as $key) {
+                $mail->addAddress($key);
+            }
+        }
+
+        if ($dataNa['emailPersonal'] != '') {
+            foreach ($dataNa['emailPersonal'] as $key) {
+                $mail->addAddress($key);
+            }
+        }
+
 
         $mail->Subject = $dataNa['subjek']; //subject email
         $mail->isHTML(true);
-        $mail->AddEmbeddedImage('base_url(assets/images/sesko.png)', 'logo_2u');
+
+        $mail->AddEmbeddedImage('assets/images/sesko.png', 'logo');
+        $mail->AddEmbeddedImage('assets/images/bg.png', 'bg');
         $mailContent = $this->load->view('Email/tampilanEmail', $dataNa, TRUE);
-        // $mailContent = "&lt;h1>SMTP Codeigniterr&lt;/h1>&lt;p>Laporan email SMTP Codeigniter.&lt;/p>";
         $mail->Body = $mailContent;
 
         // Send email

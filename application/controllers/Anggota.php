@@ -15,7 +15,7 @@ class Anggota extends CI_Controller
     public function index()
     {
         $crud = $this->grocery_crud;
-        $crud->set_theme('datatables');
+        $crud->set_theme('flexigrid');
         $crud->set_table('anggota');
         $crud->display_as('nrp', 'NRP');
         $crud->display_as('nama', 'NAMA');
@@ -27,7 +27,7 @@ class Anggota extends CI_Controller
         $crud->columns('nrp', 'nama', 'id_jabatan', 'id_pangkat', 'email');
         $crud->order_by('id_anggota', 'desc');
 
-        $crud->required_fields('id_jabatan', 'nrp', 'nama', 'email');
+        $crud->required_fields('nrp', 'nama', 'email');
         $output = $crud->render();
         $data['crud'] = $output;
         $data['page'] = 'Anggota/Data';

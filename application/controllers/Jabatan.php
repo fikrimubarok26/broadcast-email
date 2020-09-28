@@ -16,7 +16,7 @@ class Jabatan extends CI_Controller
     {
         $crud = $this->grocery_crud;
         $crud->set_table('jabatan');
-        $crud->set_theme('datatables');
+        $crud->set_theme('flexigrid');
         $crud->fields('nama_jabatan');
         $crud->columns('nama_jabatan');
         $crud->display_as('nama_jabatan', 'NAMA JABATAN');

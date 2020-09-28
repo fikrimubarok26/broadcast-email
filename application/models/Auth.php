@@ -52,9 +52,10 @@ class Auth extends CI_Model
                     'jabatan',
                     'pangkat',
                     'anggota',
-                    'login'
+                    'login',
+                    'pengirim',
+                    'pengaturan',
                 ];
-
                 if (!in_array($Router, $AllowAksesControllerAfter)) {
                     $this->session->set_flashdata('pesan', "<script>pesan_warning('Anda tidak memiliki izin untuk mengakses halaman ini, silahkan hubungi administrator','Pesan kesalahan')</script>");
                     redirect('dashboard');
